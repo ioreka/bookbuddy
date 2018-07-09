@@ -1,0 +1,15 @@
+<h1><%= @user.name %></h1>
+
+<% if !@readings.empty? %>
+  <%= @user.name %>'s book list is:
+  <ul>
+    <% @readings.each do |reading| %>
+      <h3><%= link_to reading.book.title, reading.book %></h3>
+      <p><%= reading.book.description %></p>
+    <% end %>
+  </ul>
+<% else %>
+  <%= @user.name %> hasn't picked any books yet!
+<% end %>
+<br></br>
+<%= link_to "Go back to all users", users_path %>
