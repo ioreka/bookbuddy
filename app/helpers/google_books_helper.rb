@@ -5,7 +5,7 @@ module GoogleBooksHelper
 
   def search_for_books(search)
     url = "https://www.googleapis.com/books/v1/volumes?q=#{search}&maxResults=8"
-    read_url_into_books(url)
+    read_url_into_books(url).reject { |e| e.to_s.empty? }
   end
 
   private
