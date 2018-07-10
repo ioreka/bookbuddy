@@ -18,16 +18,21 @@ module GoogleBooksHelper
   end
 
   def parse_book_and_return_instance(item)
-    Book.find_or_create_by(
-      title: item["volumeInfo"]["title"],
-      subtitle: item["volumeInfo"]["subtitle"],
-      description: item["volumeInfo"]["description"],
-      author: item["volumeInfo"]["authors"].join(", "),
-      publisher: item["volumeInfo"]["publisher"],
-      publishedDate: item["volumeInfo"]["publishedDate"],
-      pageCount: item["volumeInfo"]["pageCount"],
-      imageLinks: item["volumeInfo"]["imageLinks"]["smallThumbnail"],
-      previewLink: item["volumeInfo"]["previewLink"]
-    )
+    begin
+    item = item["volumeInfo"]
+      Book.find_or_create_by(
+        title: item["title"],
+        subtitle: item["subtitle"],
+        description: item["description"],
+        author: item["authors"].join(", "),
+        publisher: item["publisher"],
+        publishedDate: item["publishedDate"],
+        pageCount: item["pageCount"],
+        imageLinks: item["imageLinks"]["smallThumbnail"],
+        previewLink: item["previewLink"]
+      )
+    rescue
+      puts "This book cannot be created"
+    end
   end
 end
