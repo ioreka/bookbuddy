@@ -1,4 +1,9 @@
-<h1>Welcome to BookBuddy! >^.^<</h1>
+<section class="pageTitle" style="background-image: url(<%= asset_path 'books-reading-library.png' %>);">
 
 
-<%= image_tag "/public/images/books-reading-library.png" %>
+<h1 class="welcome" id="title">Welcome to BookBuddy!</h1>
+
+<!-- <%= image_tag "books-reading-library.png" %> -->
+
+<h2 class="welcome"><%= link_to "Sign up here!", signup_path %> or <%= link_to "Log in here!", login_path %></h2>
+<!-- <h2 class="welcome"><%= link_to "Log in here!", login_path %></h2> -->

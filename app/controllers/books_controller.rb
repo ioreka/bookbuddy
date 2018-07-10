@@ -1,7 +1,28 @@
 class BooksController < ApplicationController
+  include GoogleBooksHelper
+
+  @@book_search_results = []
 
   def index
-    @books = Book.all
+    # if params[:search] && params[:search] != ""
+    #   @books = search(params[:search])
+    # else
+      @books = Book.all
+    # end
+  end
+
+  def search_results
+    @books = @@book_search_results
+  end
+
+  def search
+    if params[:search] && params[:search] != ""
+      @@book_search_results = search_for_books(params[:search])
+      redirect_to search_results_path_url
+    else
+      flash[:search_error] = "There are no results matching this search"
+      redirect_to books_path
+    end
   end
 
   def show
@@ -43,7 +64,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:title, :description, :author)
+    params.require(:book).permit(:title, :description, :author, :subtitle, :publisher, :publishedDate, :pageCount, :imageLinks, :previewLink)
   end
 
 end

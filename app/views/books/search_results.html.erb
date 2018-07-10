@@ -1,0 +1,7 @@
+<h1>Here are the books matching your seacrh!</h1>
+
+<ul>
+  <% @books.each do |book| %>
+    <li><%= link_to book.title, book %></li>
+  <% end %>
+</ul>
