@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    authorized_for(params[:id])
     @user = User.find(params[:id])
   end
 
@@ -21,9 +20,10 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.valid?
+      session[:user_id] = @user.id
       redirect_to @user
     else
-      render signup_path
+      redirect_to signup_path
     end
   end
 
@@ -53,5 +53,5 @@ class UsersController < ApplicationController
     @readings = @user.readings
   end
 
-  
+
 end

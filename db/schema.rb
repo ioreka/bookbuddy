@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_09_102622) do
+ActiveRecord::Schema.define(version: 2018_07_10_124959) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 2018_07_09_102622) do
     t.integer "pageCount"
     t.string "imageLinks"
     t.string "previewLink"
+  end
+
+  create_table "followings", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "readings", force: :cascade do |t|

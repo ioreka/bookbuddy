@@ -14,7 +14,29 @@
     <% end %>
   </ul>
 <% else %>
-  <%= @user.name %> hasn't picked any books yet!
+  <% if current_user == @user %>
+    <p>You haven't picked any books yet!</p>
+    <% else %>
+    <p><%= @user.name %> hasn't picked any books yet!</p>
+  <% end %>
 <% end %>
+<br></br>
+
+<% if @user == current_user %>
+    <h3>Hello!</h3>
+  <% elsif %>
+    <% !@user.followers.include?(current_user)%>
+    <%= form_tag followings_path do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag "Follow this person" %>
+      <% end %>
+  <% else %>
+    <h3>You already follow <%= @user.name %>, <%= current_user.name %>!</h3>
+    <%= form_tag unfollow_path, method: 'DELETE' do %>
+      <%= hidden_field_tag :user_id, @user.id %>
+      <%= submit_tag "Unfollow" %>
+    <% end %>
+<% end %>
+
 <br></br>
 <%= link_to "Go back to all users", users_path %>
