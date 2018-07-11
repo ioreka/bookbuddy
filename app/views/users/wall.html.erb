@@ -1,0 +1,21 @@
+<h1>Welcome back! Recent activity:</h1>
+
+<ul><% @selected_readings.each do |reading| %>
+
+  <li><h3><%= link_to reading.user.name, reading.user %> read:</h3></li>
+  <h3><%= link_to reading.book.title, reading %></h3>
+  <p><%= reading.book.description %></p>
+  <% reading.comments.each do |c| %>
+    <p><%= c.user.name %>:</p>
+    <p><%= c.content %></p>
+  <% end %>
+
+  <%= form_tag comments_path do %>
+  <%= hidden_field_tag :reading_id, reading.id %>
+  <%= text_area_tag :content %><br>
+  <%= submit_tag "Make a comment" %>
+  <br></br>
+  <% end %>
+
+<% end %>
+</ul>

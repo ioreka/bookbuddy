@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :followee_followings, class_name: "Following", foreign_key: "followee_id"
   has_many :followers, through: :followee_followings, class_name: "User"
 
+  has_many :comments
+  has_many :commented_readings, class_name: "Reading", through: :comments
+
   has_secure_password
 
   validates :name, presence: true, uniqueness: true

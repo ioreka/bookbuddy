@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_124959) do
+ActiveRecord::Schema.define(version: 2018_07_11_085745) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2018_07_10_124959) do
     t.integer "pageCount"
     t.string "imageLinks"
     t.string "previewLink"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "reading_id"
+    t.integer "user_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reading_id"], name: "index_comments_on_reading_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "followings", force: :cascade do |t|

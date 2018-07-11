@@ -1,5 +1,11 @@
 <h1>Sign up for BookBuddy!</h1>
 
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <%= e %>
+  <% end %>
+<% end %>
+
 <%= form_for @user do |f| %>
 <%= f.label :name %>
 <%= f.text_field :name %>

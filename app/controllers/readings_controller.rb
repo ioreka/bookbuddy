@@ -1,5 +1,7 @@
 class ReadingsController < ApplicationController
 
+  before_action :authorized?
+
   def new
     @reading = Reading.new
 
@@ -8,7 +10,8 @@ class ReadingsController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     @reading = Reading.create(user: current_user, book: @book)
-    redirect_to user_path(current_user)
+    flash[:book_added] = "#{@book.title} was succesfully added to your booklist!"
+    redirect_to search_results_path
   end
 
 

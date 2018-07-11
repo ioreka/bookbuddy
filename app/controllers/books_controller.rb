@@ -1,14 +1,14 @@
 class BooksController < ApplicationController
+
+  before_action :authorized?
+
   include GoogleBooksHelper
 
   @@book_search_results = []
 
   def index
-    # if params[:search] && params[:search] != ""
-    #   @books = search(params[:search])
-    # else
-      @books = Book.all
-    # end
+    authorized?
+    @books = Book.all
   end
 
   def search_results
@@ -18,7 +18,7 @@ class BooksController < ApplicationController
   def search
     if params[:search] && params[:search] != ""
       @@book_search_results = search_for_books(params[:search])
-      redirect_to search_results_path_url
+      redirect_to search_results_path
     else
       flash[:search_error] = "There are no results matching this search"
       redirect_to books_path

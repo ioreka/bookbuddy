@@ -1,10 +1,15 @@
-<h1>Search for books!</h1>
+<div class="search_books">
+  <h1>Search for books!</h1>
 
-<h3>Enter a title, author or search term:</h3>
-<%= form_tag search_book_path_url, method: 'post' do %>
-  <%= text_field_tag(:search, params[:search]) %>
-  <%= submit_tag "Search" %>
-<% end %>
+  <h3>Enter a title, author or search term:</h3>
+
+  <div class="SearchBar">
+    <%= form_tag search_book_path, method: 'post' do %>
+      <%= text_field_tag(:search, params[:search]) %><br>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+</div>
 
 <!-- <ul>
   <% @books.each do |book| %>

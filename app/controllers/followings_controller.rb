@@ -1,5 +1,7 @@
 class FollowingsController < ApplicationController
 
+  before_action :authorized?
+
   def new
     @following = Following.new
   end

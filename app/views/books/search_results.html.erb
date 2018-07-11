@@ -1,5 +1,9 @@
 <h1>Here are the books matching your search!</h1>
 
+<% if flash[:book_added] %>
+  <p style="color: salmon;"><%= flash[:book_added] %></p>
+<% end %>
+
 <ul>
   <% @books.each do |book| %>
     <li><%= link_to book.title, book %></li>
