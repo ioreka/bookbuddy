@@ -1,44 +1,18 @@
-<h1><%= @user.name %></h1>
+<h1 class="userName"><%= @user.name %></h1>
 
 <% if flash[:authorize] %>
     <p style="color: red;"><%= flash[:authorize]  %></p>
 <% end %>
 
-<% if @user.bio == nil %>
+<% if @user.bio == nil && @user == current_user%>
 <p> Hey <%= @user.name %>, you haven't set up your profile yet. Do so here: <%= link_to "Edit Profile", edit_user_path %></p>
 <% else %>
-<h3>Bio:</h3>
-<h5><%= @user.bio %></h5>
+<h3 class="userBio"><%= @user.bio %></h3>
 <% end %>
 
 <br></br>
 
-<% if !@readings.empty? %>
-  <%= @user.name %>'s book list is:
-  <ul>
-    <% @readings.each do |reading| %>
-      <h3><%= link_to reading.book.title, reading.book %></h3>
-      <p><%= reading.book.description %></p>
-      <% reading.comments.each do |c| %>
-      <p><%= c.user.name %>:</p>
-      <p><%= c.content %></p>
-    <% end %>
-      <%= form_tag comments_path do %>
-      <%= hidden_field_tag :reading_id, reading.id %>
-      <%= text_area_tag :content %><br>
-      <%= submit_tag "Make a comment" %>
-      <% end %>
-    <% end %>
-  </ul>
-<% else %>
-  <% if current_user == @user %>
-    <p>You haven't picked any books yet! Pick Books Here: <%= link_to "Books", search_book_path %></p>
-    <% else %>
-    <p><%= @user.name %> hasn't picked any books yet!</p>
-  <% end %>
-<% end %>
-<br></br>
-
+<div class="following">
 <% if @user == current_user %>
     <% nil %>
   <% elsif %>
@@ -54,8 +28,43 @@
       <%= submit_tag "Unfollow" %>
     <% end %>
 <% end %>
+</div>
 
 <br></br>
-<%= link_to "Go back to all users", users_path %>
+
+<div class="Books">
+<% if !@readings.empty? %>
+  <ul>
+    <% @readings.each do |reading| %>
+      <h3><%= link_to reading.book.title, reading.book %></h3>
+      <p><%= reading.book.description %></p>
+      <h4>Coments for this book:</h4>
+      <% reading.comments.each do |c| %>
+        <p class="comments"><%= c.user.name %>: <%= c.content %></p>
+      <% end %>
+      <div class="makeComment">
+      <%= form_tag comments_path do %>
+      <%= hidden_field_tag :reading_id, reading.id %>
+      <%= text_area_tag :content %><br>
+      <%= submit_tag "Make a comment" %>
+      </div>
+      <% end %>
+      <% if @user == current_user %>
+      <div class="deleteFromBooklist">
+        <%= form_tag reading_path, method: 'DELETE' do %>
+        <%= hidden_field_tag :reading_id, reading.id %>
+        <%= submit_tag "Delete from your booklist" %>
+        </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <% if current_user == @user %>
+    <p>You haven't picked any books yet! Pick Books Here: <%= link_to "Books", search_book_path %></p>
+  <% else %>
+    <p><%= @user.name %> hasn't picked any books yet!</p>
+  <% end %>
+<% end %>
 <br></br>
-<%= link_to "Edit your profile", edit_user_path %>
+</div>

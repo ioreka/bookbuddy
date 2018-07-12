@@ -1,3 +1,4 @@
+<div class="searchResults">
 <h1>Here are the books matching your search!</h1>
 
 <% if flash[:book_added] %>
@@ -6,6 +7,7 @@
 
 <ul>
   <% @books.each do |book| %>
-    <li><%= link_to book.title, book %></li>
+      <ul class="searchResults"><%= image_tag("book.png", :size => "20x20") %><%= "      " %> | <%= link_to book.title, book %>, by <%= book.author %></ul>
   <% end %>
 </ul>
+</div>

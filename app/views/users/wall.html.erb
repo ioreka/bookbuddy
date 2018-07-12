@@ -1,9 +1,11 @@
-<h1>Welcome back! Recent activity:</h1>
+<h1 class="wallHeader">Recent Activity</h1>
+<h3 class="wallHeader2">Here's what you've missed:</h3>
 
-<ul><% @selected_readings.each do |reading| %>
+<div class="Books">
+<% @selected_readings.each do |reading| %>
 
-  <li><h3><%= link_to reading.user.name, reading.user %> read:</h3></li>
-  <h3><%= link_to reading.book.title, reading %></h3>
+  <h3><%= link_to reading.user.name, reading.user %> is reading:</h3>
+  <h2><%= image_tag("book.png", :size => "20x20") %><%= "    " %><%= reading.book.title %></h2>
   <p><%= reading.book.description %></p>
   <% reading.comments.each do |c| %>
     <p><%= c.user.name %>:</p>
@@ -16,6 +18,5 @@
   <%= submit_tag "Make a comment" %>
   <br></br>
   <% end %>
-
 <% end %>
-</ul>
+</div>

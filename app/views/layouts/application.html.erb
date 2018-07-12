@@ -14,9 +14,9 @@
       <p style="color: red;"><%= flash[:authorized] %></p>
     <% end %>
     <% if logged_in? %>
-     <%= link_to "Log Out", logout_path, method: 'post' %> | <%= link_to "Search for books", books_path %> | <%= link_to "Your page", user_path(current_user) %>
+    <%= link_to "Your wall", user_wall_path(current_user) %> | <%= link_to "Your page", user_path(current_user) %> | <%= link_to "Search for books", books_path %> | <%= link_to "Search for friends", users_path %> | <%= link_to "Log Out", logout_path, method: 'post' %>
+
     <% else %>
-      <%= link_to "Log In", login_path %>
     <% end %>
     <%= yield %>
   </body>

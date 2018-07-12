@@ -1,4 +1,5 @@
-<h1><%= @book.title %></h1>
+<div class="Books">
+<h1><%= image_tag("book.png", :size => "30x30") %><%= "   " %><%= @book.title %></h1>
 
 <h2><%= @book.subtitle %></h2>
 
@@ -12,3 +13,6 @@
   <%= hidden_field_tag :book_id, @book.id %>
   <%= submit_tag "Add this to your booklist" %>
 <% end %>
+
+<p><%= link_to "Go back to all books", search_results_path %></p>
+</div>

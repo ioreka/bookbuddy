@@ -1,0 +1,21 @@
+<h1 class="userName"><%= @reading.user.name %>'s reading</h1>
+
+<div class="Books">
+<h1><%= @reading.book.title %></h1>
+
+<h2><%= @reading.book.subtitle %></h2>
+
+<h3>Author(s): <%= @reading.book.author %></h3>
+
+<p>Description: <%= @reading.book.description %></p>
+<p>Publisher: <%= @reading.book.publisher %>, <%= @reading.book.publishedDate %></p>
+<p>Page count: <%= @reading.book.pageCount %> pages</p>
+
+  <div class="makeComment">
+    <%= form_tag comments_path do %>
+    <%= hidden_field_tag :reading_id, @reading.id %>
+    <%= text_area_tag :content %><br>
+    <%= submit_tag "Make a comment" %>
+    <% end %>
+  </div>
+</div>
