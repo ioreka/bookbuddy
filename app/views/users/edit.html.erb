@@ -1,3 +1,4 @@
+<div class = "EditUserForm">
 <h2> Hi <%= @user.name %> edit your profile here:</h2>
 <p>(please make sure to enter your password so we can confirm it's you!)</p>
 
@@ -7,8 +8,6 @@
   <% end %>
 <% end %>
 
-
-<div class = "EditUserForm">
 <%= form_for @user do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>

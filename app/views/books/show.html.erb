@@ -8,6 +8,9 @@
 <p>Description: <%= @book.description %></p>
 <p>Publisher: <%= @book.publisher %>, <%= @book.publishedDate %></p>
 <p>Page count: <%= @book.pageCount %> pages</p>
+<a href="<%= @book.previewLink %>" target="blank">Preview Book</a>
+
+<br></br>
 
 <%= form_tag readings_path do %>
   <%= hidden_field_tag :book_id, @book.id %>

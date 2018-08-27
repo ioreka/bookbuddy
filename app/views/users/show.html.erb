@@ -4,10 +4,18 @@
     <p style="color: red;"><%= flash[:authorize]  %></p>
 <% end %>
 
+
+
+<% if @user == current_user%>
+  | <%= link_to "Edit Profile", edit_user_path %>
+<% end %>
+
+<div class="userBio">
 <% if @user.bio == nil && @user == current_user%>
-<p> Hey <%= @user.name %>, you haven't set up your profile yet. Do so here: <%= link_to "Edit Profile", edit_user_path %></p>
+  <p> Hey <%= @user.name %>, you haven't set up your profile yet!</p>
 <% else %>
-<h3 class="userBio"><%= @user.bio %></h3>
+  <p class="userBio"><%= @user.bio %></p>
+  </div>
 <% end %>
 
 <br></br>
@@ -61,9 +69,9 @@
   </ul>
 <% else %>
   <% if current_user == @user %>
-    <p>You haven't picked any books yet! Pick Books Here: <%= link_to "Books", search_book_path %></p>
+    <p id="userBio2">You haven't picked any books yet! Pick Books Here: <%= link_to "Books", search_book_path %></p>
   <% else %>
-    <p><%= @user.name %> hasn't picked any books yet!</p>
+    <p id="userBio"><%= @user.name %> hasn't picked any books yet!</p>
   <% end %>
 <% end %>
 <br></br>
